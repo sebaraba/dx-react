@@ -2,7 +2,6 @@ import React, { ComponentClass } from 'react'
 
 import MenuWallet from 'containers/MenuWallet'
 import MenuAuctions from 'containers/MenuAuctions'
-import MenuOneClickToggle from 'containers/MenuOneClickToggle'
 import Hamburger from 'components/Hamburger'
 import MenuFeeBalance from 'containers/MenuFeeBalance'
 import { Link } from 'react-router-dom'
@@ -22,8 +21,9 @@ interface HeaderState {
   network?: string | 'RINKEBY' | 'MAIN' | 'UNKNOWN';
 }
 
-export const Header = ({ content, dumb, network, noMenu }: HeaderProps & HeaderState) => (
+export const Header = ({ content, dumb, network, noMenu, expressMode }: HeaderProps & HeaderState & State) => (
   <header className={content ? 'solid-background' : ''}>
+    {console.log('SORT2' + expressMode)}
     <div>
       <Link
         to="/"
@@ -35,7 +35,7 @@ export const Header = ({ content, dumb, network, noMenu }: HeaderProps & HeaderS
         <MenuWallet />
         <MenuAuctions />
         <MenuFeeBalance />
-        <MenuOneClickToggle />
+        {/*<MenuOneClickToggle />*/}
       </>}
       {!noMenu && <Hamburger />}
     </div>

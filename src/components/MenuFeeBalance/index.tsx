@@ -11,19 +11,22 @@ export interface MenuFeeBalanceProps {
   feeRatio: number,
   mgnSupply: Balance,
   showFeeRatio: boolean,
+  expressMode: boolean,
 }
 
-const MenuFeeBalance = ({ feeRatio, mgnSupply, showFeeRatio }: MenuFeeBalanceProps) =>
+const MenuFeeBalance = ({ feeRatio, mgnSupply, showFeeRatio, expressMode }: MenuFeeBalanceProps) =>
   <div className="menuFeeBalance">
-    <p>
-      <a
-        href={URLS.DXDAO}
-        target="_blank"
-        title="MAGNOLIA - click for more info"
-      >
-      MGN <strong>{showFeeRatio ? mgnSupply : 'N/A'}</strong>
-      </a>
-    </p>
+      {console.log('SORT!' + expressMode)}
+      {!expressMode &&
+      <p>
+          <a
+              href={URLS.DXDAO}
+              target="_blank"
+              title="MAGNOLIA - click for more info"
+          >
+              MGN <strong>{showFeeRatio ? mgnSupply : 'N/A'}</strong>
+          </a>
+      </p>}
     <p>
       <Link title="Liquidity Contribution - click for more info" to={URLS.LIQUIDITY_CONTRIBUTION}>
       Liq. Contr. <strong>{showFeeRatio ? `${feeRatio * 100}%` : 'N/A'}</strong>

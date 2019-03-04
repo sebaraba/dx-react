@@ -1,11 +1,12 @@
 import { connect } from 'react-redux'
 
-import MenuOneClickMode from 'components/MenuOneClickToggle'
+import MenuOneClickMode, { OwnProps } from 'components/MenuOneClickToggle'
+import { State } from '../../types'
 
-import { State } from 'types'
+const mapStateToProps = (state: State) => {
+  return {
+    expressMode: state.expressMode,
+  }
+}
 
-const mapState = ({ oneClickMode }: State) => ({
-  oneClickMode,
-})
-
-export default connect(mapState)(MenuOneClickMode)
+export default connect<OwnProps>(mapStateToProps)(MenuOneClickMode)
