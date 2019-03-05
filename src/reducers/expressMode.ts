@@ -5,7 +5,7 @@ import { setExpressMode } from '../actions/expressMode'
 
 export default handleActions<ExpressMode>({
   [setExpressMode.toString()]: (state: any, action: any) => ({
-      ...state,
-      active: !action.payload.expressMode,
-    }),
+    ...state,
+    [action.payload.expressMode]: !action.payload.expressMode,
+  }),
 }, false)

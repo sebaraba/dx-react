@@ -1,12 +1,10 @@
 import { connect } from 'react-redux'
 
-import MenuExpressMode, { OwnProps } from 'components/MenuExpressMode'
+import MenuExpressMode from 'components/MenuExpressMode'
 import { State } from '../../types'
 
-const mapStateToProps = (state: State) => {
-  return {
-    expressMode: state.expressMode,
-  }
+const mapState = ({ expressMode } : State) => {
+  expressMode
 }
 
-export default connect<OwnProps>(mapStateToProps)(MenuExpressMode)
+export default connect(mapState as any)(MenuExpressMode as any)

@@ -1,38 +1,18 @@
 import React from 'react'
 import { State } from '../../types'
+import { setExpressMode } from '../../actions/expressMode'
 
-export interface OwnProps {
-  expressMode: boolean,
-}
-
-interface StateProps {
-  expressMode: boolean,
-}
-
-interface DispatchProps {
-  onSomeEvent: () => void
-}
-
-type Props = StateProps & DispatchProps & OwnProps
-
-class MenuExpressMode extends React.Component<Props, State> {
-  handleClick = () => {
-    this.setState({
-      expressMode: !this.state.expressMode,
-    })
-  }
-
-  render() {
-    {console.log('SORT1' + this.state.expressMode + 'props' + this.props.children)}
-    return <div className="menuFeeBalance">
-            <p>
-                <button style={{ background: '#eaeef3', border: '#eaeef3' }} onClick={this.handleClick}>
-                    {this.state.expressMode ? 'Disable' : 'Enable'} <strong> One Click Trade </strong>
-                </button>
-            </p>
-        </div>
-  }
-
-}
+const MenuExpressMode = ({ expressMode } : State) =>
+    <div className="menuFeeBalance">
+        <p>
+            {console.log('SORTING' + expressMode)}
+            <button style={{ background: '#eaeef3', border: '#eaeef3' }} onClick={event1 => {
+              event1.preventDefault()
+              setExpressMode({ expressMode: false })
+            }}>
+                {expressMode ? 'Disable' : 'Enable'} <strong> One Click Trade </strong>
+            </button>
+        </p>
+    </div>
 
 export default MenuExpressMode
