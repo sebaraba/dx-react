@@ -10,6 +10,7 @@ import { State } from 'types'
 import { withRouter } from 'react-router'
 import { getActiveProviderObject } from 'selectors'
 import { COMPANY_NAME, COMPANY_SLOGAN } from 'globals'
+import MenuExpressMode from '../MenuExpressMode'
 
 interface HeaderProps {
   content?: boolean;
@@ -35,7 +36,7 @@ export const Header = ({ content, dumb, network, noMenu, expressMode }: HeaderPr
         <MenuWallet />
         <MenuAuctions />
         <MenuFeeBalance />
-        {/*<MenuOneClickToggle />*/}
+        <MenuExpressMode />
       </>}
       {!noMenu && <Hamburger />}
     </div>

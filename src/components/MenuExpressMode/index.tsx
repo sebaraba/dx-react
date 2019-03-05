@@ -15,7 +15,7 @@ interface DispatchProps {
 
 type Props = StateProps & DispatchProps & OwnProps
 
-class MenuOneClickToggle extends React.Component<Props, State> {
+class MenuExpressMode extends React.Component<Props, State> {
   handleClick = () => {
     this.setState({
       expressMode: !this.state.expressMode,
@@ -35,4 +35,4 @@ class MenuOneClickToggle extends React.Component<Props, State> {
 
 }
 
-export default MenuOneClickToggle
+export default MenuExpressMode

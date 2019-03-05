@@ -26,6 +26,7 @@ export type TokenAddresses = Account[]
 export type Balance = string
 export type Account = string
 export type BigNumber = BigNumber
+export type ExpressMode = boolean
 
 export interface Network2URL {
   RINKEBY: 'https://rinkeby.etherscan.io/',

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import MenuOneClickMode, { OwnProps } from 'components/MenuOneClickToggle'
+import MenuExpressMode, { OwnProps } from 'components/MenuExpressMode'
 import { State } from '../../types'
 
 const mapStateToProps = (state: State) => {
@@ -9,4 +9,4 @@ const mapStateToProps = (state: State) => {
   }
 }
 
-export default connect<OwnProps>(mapStateToProps)(MenuOneClickMode)
+export default connect<OwnProps>(mapStateToProps)(MenuExpressMode)

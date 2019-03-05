@@ -1,13 +1,11 @@
 import { handleActions } from 'redux-actions'
 
-import { State } from 'types'
+import { ExpressMode } from 'types'
 import { setExpressMode } from '../actions/expressMode'
 
-const reducer = handleActions<State>({
-  [setExpressMode.toString()]: (state, action) => ({
+export default handleActions<ExpressMode>({
+  [setExpressMode.toString()]: (state: any, action: any) => ({
       ...state,
-      ...action.payload,
+      active: !action.payload.expressMode,
     }),
-}, {} as State)
-
-export default reducer
+}, false)
