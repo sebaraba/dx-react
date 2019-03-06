@@ -13,35 +13,36 @@ export interface MenuFeeBalanceProps {
   mgnSupply: Balance,
   showFeeRatio: boolean,
   expressMode: boolean,
+  dispatch(mode: any): void
 }
 
-const MenuFeeBalance = ({ feeRatio, mgnSupply, showFeeRatio, expressMode }: MenuFeeBalanceProps) =>
-  <div className="menuFeeBalance">
-      {console.log('SORT!' + expressMode)}
-      {!expressMode &&
-      <p>
-          <a
-              href={URLS.DXDAO}
-              target="_blank"
-              title="MAGNOLIA - click for more info"
-          >
-              MGN <strong>{showFeeRatio ? mgnSupply : 'N/A'}</strong>
-          </a>
-      </p>}
-    <p>
-      <Link title="Liquidity Contribution - click for more info" to={URLS.LIQUIDITY_CONTRIBUTION}>
-      Liq. Contr. <strong>{showFeeRatio ? `${feeRatio * 100}%` : 'N/A'}</strong>
-      </Link>
-    </p>
-      <p>
-          {console.log('SORTING' + expressMode)}
-          <button style={{ background: '#eaeef3', border: '#eaeef3' }} onClick={event1 => {
-            event1.preventDefault()
-            setExpressMode({ expressMode: !expressMode })
-          }}>
-              {expressMode ? 'Disable' : 'Enable'} <strong> One Click Trade </strong>
-          </button>
-      </p>
-  </div>
+const MenuFeeBalance = ({ feeRatio, mgnSupply, showFeeRatio, expressMode, dispatch }: MenuFeeBalanceProps) =>
+    <div className="menuFeeBalance">
+        {console.log('SORT!' + expressMode)}
+        {!expressMode &&
+        <p>
+            <a
+                href={URLS.DXDAO}
+                target="_blank"
+                title="MAGNOLIA - click for more info"
+            >
+                MGN <strong>{showFeeRatio ? mgnSupply : 'N/A'}</strong>
+            </a>
+        </p>}
+        <p>
+            <Link title="Liquidity Contribution - click for more info" to={URLS.LIQUIDITY_CONTRIBUTION}>
+                Liq. Contr. <strong>{showFeeRatio ? `${feeRatio * 100}%` : 'N/A'}</strong>
+            </Link>
+        </p>
+        <p>
+            {console.log('SORTING' + expressMode)}
+            <button style={{ background: '#eaeef3', border: '#eaeef3' }} onClick={event1 => {
+              event1.preventDefault()
+              dispatch(setExpressMode({ expressMode: !expressMode }))
+            }}>
+                {expressMode ? 'Disable' : 'Enable'} <strong> One Click Trade </strong>
+            </button>
+        </p>
+    </div>
 
 export default MenuFeeBalance
