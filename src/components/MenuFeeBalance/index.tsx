@@ -18,7 +18,6 @@ export interface MenuFeeBalanceProps {
 
 const MenuFeeBalance = ({ feeRatio, mgnSupply, showFeeRatio, expressMode, dispatch }: MenuFeeBalanceProps) =>
     <div className="menuFeeBalance">
-        {console.log('SORT!' + expressMode)}
         {!expressMode &&
         <p>
             <a
@@ -35,7 +34,6 @@ const MenuFeeBalance = ({ feeRatio, mgnSupply, showFeeRatio, expressMode, dispat
             </Link>
         </p>
         <p>
-            {console.log('SORTING' + expressMode)}
             <button style={{ background: '#eaeef3', border: '#eaeef3' }} onClick={event1 => {
               event1.preventDefault()
               dispatch(setExpressMode({ expressMode: !expressMode }))
