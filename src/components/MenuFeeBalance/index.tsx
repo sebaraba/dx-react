@@ -18,7 +18,6 @@ export interface MenuFeeBalanceProps {
 
 const MenuFeeBalance = ({ feeRatio, mgnSupply, showFeeRatio, expressMode, dispatch }: MenuFeeBalanceProps) =>
     <div className="menuFeeBalance">
-        {console.log('SORTING' + expressMode)}{expressMode && <dialog>ATTENTION: You are in DEVELOPMENT</dialog>}
         {!expressMode &&
         <p>
             <a

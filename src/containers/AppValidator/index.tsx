@@ -168,7 +168,7 @@ class AppValidator extends React.Component<any> {
 
   renderError = () => {
     const { error, loading, online, set_up_complete } = this.state,
-      { disclaimer_accepted } = this.props
+      { disclaimer_accepted, expressMode } = this.props
 
     if (!disclaimer_accepted || loading) return
 
@@ -179,6 +179,7 @@ class AppValidator extends React.Component<any> {
         { !online && <div className="offlineBanner"><span>App is currently offline - please your check internet connection and refresh the page </span></div> }
         { (!set_up_complete || !this.props.unlocked) && online && <div className="offlineBanner"><span>{ error ? `App problems detected: ${error}` : 'App problems detected. Please check your provider and refresh the page.' } </span></div> }
         {/* TEMPORARY - TODO: REMOVE */}
+        {console.log('SORTING' + expressMode)}{expressMode && <div className="offlineBanner"><span>ATTENTION: You are in EXPRESS MODE</span></div>}
         <div className="offlineBanner"><span>Withdraw and claim funds from previous versions <a href={`https://${URLS.APP_URLS_PROD.MAIN[1]}`}>here</a></span></div>
       </>
     )
@@ -211,6 +212,7 @@ const mapState = (state: State) => {
     available: provider && provider.available,
 
     disclaimer_accepted: state.settings.disclaimer_accepted,
+    expressMode: state.expressMode,
   }
 }
 
