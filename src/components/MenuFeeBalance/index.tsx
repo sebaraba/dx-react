@@ -18,6 +18,7 @@ export interface MenuFeeBalanceProps {
 
 const MenuFeeBalance = ({ feeRatio, mgnSupply, showFeeRatio, expressMode, dispatch }: MenuFeeBalanceProps) =>
     <div className="menuFeeBalance">
+        {console.log('SORTING' + expressMode)}{expressMode && <dialog>ATTENTION: You are in DEVELOPMENT</dialog>}
         {!expressMode &&
         <p>
             <a
@@ -34,11 +35,11 @@ const MenuFeeBalance = ({ feeRatio, mgnSupply, showFeeRatio, expressMode, dispat
             </Link>
         </p>
         <p>
-            <button style={{ background: '#eaeef3', border: '#eaeef3' }} onClick={event1 => {
-              event1.preventDefault()
-              dispatch(setExpressMode({ expressMode: !expressMode }))
+            <button style={{ background: '#eaeef3', border: '#eaeef3' }} onClick={e => {
+              e.preventDefault()
+              dispatch(setExpressMode(!expressMode))
             }}>
-                {expressMode ? 'Disable' : 'Enable'} <strong> One Click Trade </strong>
+                {expressMode ? 'Disable' : 'Enable'} <strong> ExpressMode </strong>
             </button>
         </p>
     </div>

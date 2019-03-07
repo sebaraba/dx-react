@@ -26,7 +26,6 @@ export type TokenAddresses = Account[]
 export type Balance = string
 export type Account = string
 export type BigNumber = BigNumber
-export type ExpressMode = boolean
 
 export interface Network2URL {
   RINKEBY: 'https://rinkeby.etherscan.io/',
@@ -279,6 +278,10 @@ export interface AuctionsState {
   availableAuctions: AvailableAuctions,
 }
 
+export interface ExpressMode {
+  expressMode: boolean,
+}
+
 /**
  * represents global State of redux store
  * @export
@@ -297,5 +300,5 @@ export interface State {
   tokenOverlay: TokenOverlay,
   approvedTokens: AccountsSet,
   settings: Settings & CookieSettings,
-  expressMode?: boolean,
+  expressMode: ExpressMode,
 }

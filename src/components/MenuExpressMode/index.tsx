@@ -8,7 +8,7 @@ const MenuExpressMode = ({ expressMode } : State) =>
             {console.log('SORTING' + expressMode)}
             <button style={{ background: '#eaeef3', border: '#eaeef3' }} onClick={event1 => {
               event1.preventDefault()
-              setExpressMode({ expressMode: false })
+              setExpressMode(false)
             }}>
                 {expressMode ? 'Disable' : 'Enable'} <strong> One Click Trade </strong>
             </button>
