@@ -21,9 +21,8 @@ interface HeaderState {
   network?: string | 'RINKEBY' | 'MAIN' | 'UNKNOWN';
 }
 
-export const Header = ({ content, dumb, network, noMenu, expressMode }: HeaderProps & HeaderState & State) => (
+export const Header = ({ content, dumb, network, noMenu }: HeaderProps & HeaderState & State) => (
   <header className={content ? 'solid-background' : ''}>
-    {console.log('SORT2' + expressMode)}
     <div>
       <Link
         to="/"
