@@ -7,38 +7,32 @@ import AuctionWalletSummary from 'containers/AuctionWalletSummary'
 import ButtonCTA from 'components/ButtonCTA'
 import AuctionAmountSummary from 'containers/AuctionAmountSummary'
 
-export interface WalletPanelProps {
+export interface ExpressModeWalletPanelProps {
   activeProvider: string,
-  expressMode: boolean,
   checkUserStateAndSell(): void,
+  expressMode: boolean
 }
 
-const WalletPanel: React.SFC<WalletPanelProps> = ({ activeProvider, checkUserStateAndSell, expressMode }) => (
-
+const ExpressModeWalletPanel: React.SFC<ExpressModeWalletPanelProps> = ({ activeProvider, checkUserStateAndSell }) => (
     <AuctionContainer auctionDataScreen="details">
         <AuctionHeader backTo="/order">
             Confirm Deposit Details
         </AuctionHeader>
-        <AuctionAmountSummary/>
-        <AuctionPriceBar header="Price"/>
-        <AuctionWalletSummary/>
-        {console.log('SORTINGG' +  expressMode)}
+        <AuctionAmountSummary />
+        <AuctionPriceBar header="Price" />
+        <AuctionWalletSummary />
         <p>
-            When submitting your order, you will be asked to sign transactions
-            with {activeProvider || 'your Wallet provider'}.
+            When submitting your order, you will be asked to sign transactions with {activeProvider || 'your Wallet provider'}.
             Explanations will be provided with each transaction.
             Upon final confirmation, your deposit will be added on your behalf to the next auction.
             <br/>
             <br/>
             Every auction takes approx. 6 hours.
         </p>
-        {!expressMode && <ButtonCTA onClick={checkUserStateAndSell}>
-            Submit Deposit <i className="icon icon-walletOK"></i>
-        </ButtonCTA>}
-        {expressMode && <ButtonCTA onClick={checkUserStateAndSell}>
-            One Click Trade <i className="icon icon-walletOK"></i>
-        </ButtonCTA>}
+        <ButtonCTA onClick={checkUserStateAndSell}>
+            Submit One Click Trade <i className="icon icon-walletOK"></i>
+        </ButtonCTA>
     </AuctionContainer>
 )
 
-export default WalletPanel
+export default ExpressModeWalletPanel

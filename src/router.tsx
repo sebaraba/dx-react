@@ -10,6 +10,7 @@ import Home from 'containers/Home'
 import PageNotFound from 'components/PageNotFound'
 import OrderPanel from 'containers/OrderPanel'
 import WalletPanel from 'containers/WalletPanel'
+import ExpressModeWalletPanel from 'containers/ExpressModeWalletPanel'
 import AuctionPanel from 'containers/AuctionPanel'
 import ContentPageContainer from 'containers/ContentPages'
 import Cookies from 'components/Cookies'
@@ -43,6 +44,7 @@ const HomeWHF = withHeaderAndFooter(Home)
 const OrderPanelWHF = withHeaderAndFooter(OrderPanel)
 const WalletPanelWHF = withHeaderAndFooter(WalletPanel)
 const AuctionPanelWHF = withHeaderAndFooter(AuctionPanel)
+const ExpressModeWalletPanelWHF = withHeaderAndFooter(ExpressModeWalletPanel)
 // true passed in to show different, solidBackgorund Header
 const ContentPageContainerWHF =
   withHeaderAndFooter(ContentPageContainer, { content: true, dumb: true }, SHOW_FOOTER_CONTENT)
@@ -116,6 +118,7 @@ const AppRouter: React.SFC<AppRouterProps> = ({ analytics, history, disabled }) 
                 <Route exact path="/" component={HomeWHF} />
                 <Route path="/order" component={OrderPanelWHF} />
                 <Route path="/wallet" component={WalletPanelWHF} />
+                <Route path="/expressWallet" componenet={ExpressModeWalletPanelWHF} />
 
                 {/* TODO: check for valid params.addr and redirect if necessary */}
                 <Route path="/auction/:sell-:buy-:index" component={AuctionPanelWHF} />
