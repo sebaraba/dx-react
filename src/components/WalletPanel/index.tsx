@@ -22,7 +22,6 @@ const WalletPanel: React.SFC<WalletPanelProps> = ({ activeProvider, checkUserSta
         <AuctionAmountSummary/>
         <AuctionPriceBar header="Price"/>
         <AuctionWalletSummary/>
-        {console.log('SORTINGG' +  expressMode)}
         <p>
             When submitting your order, you will be asked to sign transactions
             with {activeProvider || 'your Wallet provider'}.
