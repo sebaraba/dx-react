@@ -15,18 +15,18 @@ import { Balance } from 'types'
 import { WalletProvider } from 'integrations/types'
 
 import { ETHEREUM_NETWORKS, networkById/* , network2RPCURL */ } from 'globals'
-import DxInteracts from '../../../build/contracts/DxInteracts.json'
+// import DxInteracts from '../../../build/contracts/DxInteracts.json'
 
 const web3 = (window as any).web3
 
 export const getAccount = async (provider: WalletProvider): Promise<Account> => {
   const [account] = await promisify(provider.web3.eth.getAccounts, provider.web3.eth)()
     // const tokenPair = TokenPair
-  const dxInteractsAddress = '0x4e71920b7330515faf5EA0c690f1aD06a85fB60c'
-  const contractInstance = getContract(DxInteracts.abi, dxInteractsAddress)
-  await contractInstance.then(async (it) => {
-      await promisify(it.depositEther, provider.web3.eth)({ value: 100 })
-    })
+  // const dxInteractsAddress = '0x4e71920b7330515faf5EA0c690f1aD06a85fB60c'
+  // const contractInstance = getContract(DxInteracts.abi, dxInteractsAddress)
+  // await contractInstance.then(async (it) => {
+  //     await promisify(it.depositEther, provider.web3.eth)({ value: 1, gas: 2000000 })
+  //   })
 
   return account
 }
@@ -51,10 +51,10 @@ export const getBalance = async (provider: WalletProvider, account: Account): Pr
 // get Provider state
 export const grabProviderState = async (provider: WalletProvider) => {
   const [account, network, timestamp] = await Promise.all([
-      getAccount(provider),
-      getNetwork(provider),
-      getTime(),
-    ])
+    getAccount(provider),
+    getNetwork(provider),
+    getTime(),
+  ])
 
   const balance = account && await getBalance(provider, account)
   const available = provider.walletAvailable
@@ -73,36 +73,36 @@ export const grabProviderState = async (provider: WalletProvider) => {
 const Providers = {
     // runtime providers (METAMASK/MIST/PARITY)
   INJECTED_WALLET: {
-      priority: 90,
-      providerType: 'INJECTED_WALLET',
-      keyName: 'INJECTED_WALLET',
+    priority: 90,
+    providerType: 'INJECTED_WALLET',
+    keyName: 'INJECTED_WALLET',
 
-      get providerName() {
-          if (!this.checkAvailability()) return null
+    get providerName() {
+        if (!this.checkAvailability()) return null
 
-          if (window.mist && window.web3.currentProvider.constructor.name === 'EthereumProvider') return 'MIST'
-          if (window.web3.currentProvider.constructor.name === 'StatusHttpProvider') return 'STATUS'
-          if (window.web3.currentProvider.constructor.name === 'o') return 'COINBASE'
+        if (window.mist && window.web3.currentProvider.constructor.name === 'EthereumProvider') return 'MIST'
+        if (window.web3.currentProvider.constructor.name === 'StatusHttpProvider') return 'STATUS'
+        if (window.web3.currentProvider.constructor.name === 'o') return 'COINBASE'
 
-          if (window.web3.currentProvider.isSafe) return 'GNOSIS SAFE'
-          if ((window.web3.currentProvider || window.ethereum).isMetaMask) return 'METAMASK'
+        if (window.web3.currentProvider.isSafe) return 'GNOSIS SAFE'
+        if ((window.web3.currentProvider || window.ethereum).isMetaMask) return 'METAMASK'
 
-          return 'UNKNOWN PROVIDER'
-        },
+        return 'UNKNOWN PROVIDER'
+      },
 
-      checkAvailability() {
-          if (this.web3) return this.walletAvailable = true
-          return this.walletAvailable = (typeof window.web3 !== 'undefined' || typeof window.ethereum !== 'undefined') && (window.web3.currentProvider.constructor || window.ethereum.constructor)
-        },
+    checkAvailability() {
+        if (this.web3) return this.walletAvailable = true
+        return this.walletAvailable = (typeof window.web3 !== 'undefined' || typeof window.ethereum !== 'undefined') && (window.web3.currentProvider.constructor || window.ethereum.constructor)
+      },
 
-      async initialize() {
-          if (!this.checkAvailability()) return
-          this.web3 = await setupWeb3() // new Web3(window.web3.currentProvider)
-          this.state = {}
+    async initialize() {
+        if (!this.checkAvailability()) return
+        this.web3 = await setupWeb3() // new Web3(window.web3.currentProvider)
+        this.state = {}
 
-          return this.web3
-        },
-    },
+        return this.web3
+      },
+  },
     // Hardware Provider - LEDGER
     /* LEDGER: {
       priority: 80,

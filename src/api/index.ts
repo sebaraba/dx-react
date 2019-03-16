@@ -10,6 +10,7 @@ import { dxAPI as dutchXAPI, Index, DefaultTokenList, DefaultTokenObject, DutchE
 import { promisedContractsMap } from './contracts'
 import { AuctionStatus, ETH_ADDRESS, FIXED_DECIMALS } from 'globals'
 import { lastArrVal } from 'utils'
+import { promisedDxInteracts } from './DxInteracts'
 
 let API: dutchXAPI
 export const dxAPI = /* (window as any).AP = */ async (provider?: Provider, force?: boolean | 'FORCE') => {
@@ -1148,14 +1149,15 @@ export const getTokenPriceInUSD = async (tokenAddress: string) => {
 
 async function initAPI(provider: Provider, force?: boolean | 'FORCE'): Promise<dutchXAPI> {
   try {
-    const [web3, Tokens, DutchX, PriceOracle] = await Promise.all([
+    const [web3, Tokens, DutchX, PriceOracle, DxInteracts] = await Promise.all([
       promisedWeb3(provider, force),
       promisedTokens(),
       promisedDutchX(),
       promisedPriceOracle(),
+      promisedDxInteracts(),
     ])
     console.log('INDEX API => ', { web3, Tokens, DutchX, PriceOracle })
-    return { web3, Tokens, DutchX, PriceOracle }
+    return { web3, Tokens, DutchX, PriceOracle, DxInteracts }
   } catch (err) {
     console.error('Error in init - API has not been initialised')
   }

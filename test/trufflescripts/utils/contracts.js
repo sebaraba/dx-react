@@ -17,6 +17,8 @@ module.exports = (artifacts, web3) => {
   const PriceFeed = artifacts.require('PriceFeed')
   const Medianizer = artifacts.require('Medianizer')
 
+  const DxInteracts = artifacts.require('DxInteracts')
+
   /**
  * @typedef {"ETH"|"GNO"|"FRT"|"OWL"} TokenCode - token symbol
  */
@@ -47,6 +49,7 @@ module.exports = (artifacts, web3) => {
 
     TokenOMG,
     TokenRDN,
+    DxInteracts,
   }
 
   const shortMap = {
@@ -62,6 +65,7 @@ module.exports = (artifacts, web3) => {
     PriceOracleInterface: 'po',
     PriceFeed: 'pf',
     Medianizer: 'mn',
+    DxInteracts: 'dxi',
   }
 
   const mapToNumber = arr => arr.map(n => (n.toString ? n.toString() : n))
@@ -84,6 +88,7 @@ module.exports = (artifacts, web3) => {
 
     deployedMap[shortMap.TokenOWL] = await TokenOWL.at(TokenOWLProxy.address)
     deployedMap[shortMap.DutchExchange] = await artifacts.require('DutchExchange').at(Proxy.address)
+    deployedMap[shortMap.DxInteracts] = await DxInteracts.at(DxInteracts.address)
     // deployedMap[shortMap.TokenOMG] = await TokenOMG.new(5000000e18)
     // deployedMap[shortMap.TokenRDN] = await TokenRDN.new(5000000e18)
     // remove extra non-tokens

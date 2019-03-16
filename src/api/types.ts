@@ -193,6 +193,27 @@ export interface DeployedContract {
   address: Account,
 }
 
+type DxInteractsExtended = {
+  [K in keyof DxInteracts]: DxInteracts[K] extends (...args: any[]) => Promise<Receipt> ?
+      DxInteracts[K] & { estimateGas?: (mainParams?: any, txParams?: TransactionObject) => any, sendTransaction?: DxInteracts<Hash>[K]} :
+      DxInteracts[K]
+}
+
+interface DxInteracts<T = Receipt> {
+  address: Account,
+  // postSellOrder(sellAddress: Account, buyAddress: Account,
+  //               auctionIndex: index, sellOrderAmount: BigNumber): Promise<T>,
+
+  postSellOrder(
+      pair: TokenPair,
+      amount: Balance,
+      index: Index,
+      account: Account,
+  ): Promise<T>,
+}
+
+export { DxInteractsExtended as DxInteracts }
+
 export interface ERC20Interface extends DeployedContract {
   totalSupply(): Promise<BigNumber>,
   balanceOf(account: Account): Promise<BigNumber>,
@@ -625,4 +646,5 @@ export interface dxAPI {
   Tokens: TokensInterfaceExtended,
   DutchX: DutchExchangeExtended,
   PriceOracle: PriceOracle,
+  DxInteracts: DxInteractsExtended,
 }

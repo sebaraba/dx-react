@@ -9,6 +9,7 @@ import {
   DeployedContract,
   ContractArtifact,
   PriceOracleInterface,
+  DxInteracts,
 } from './types'
 import { Provider } from 'types'
 import { contractVersionChecker } from 'utils'
@@ -25,6 +26,7 @@ const contractNames = [
   'TokenOWL',
   'TokenOWLProxy',
   'PriceOracleInterface',
+  'DxInteracts',
 ]
 
 // breaks in rinkeby, cancel for now
@@ -56,6 +58,7 @@ interface ContractsMap {
   TokenOWL?:            OWLInterface,
   TokenOMG?:            GNOInterface,
   TokenRDN?:            GNOInterface,
+  DxInteracts?:         DxInteracts,
 }
 
 interface ContractsMapWProxy extends ContractsMap {
@@ -69,7 +72,7 @@ if (process.env.FE_CONDITIONAL_ENV === 'development') {
   req = require.context(
     '../../build/contracts/',
     false,
-    /(DutchExchange|DutchExchangeProxy|DutchExchangeHelper|TokenFRT|TokenFRTProxy|EtherToken|TokenGNO|TokenOWL|TokenOWLProxy|PriceOracleInterface|TokenOMG|TokenRDN)\.json$/,
+    /(DutchExchange|DutchExchangeProxy|DutchExchangeHelper|TokenFRT|TokenFRTProxy|EtherToken|TokenGNO|TokenOWL|TokenOWLProxy|PriceOracleInterface|TokenOMG|TokenRDN|DxInteracts)\.json$/,
   )
 } else {
   req = require.context(
@@ -91,7 +94,8 @@ type TokenArtifact =
   './EtherToken.json'          |
   './TokenGNO.json'            |
   './TokenOMG.json'            |
-  './TokenRDN.json'
+  './TokenRDN.json'            |
+    './DxInteracts.json'
 
 const reqKeys = req.keys() as TokenArtifact[]
 const ContractsArtifacts: ContractArtifact[] = contractNames.map(
