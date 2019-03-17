@@ -10,7 +10,7 @@ import { dxAPI as dutchXAPI, Index, DefaultTokenList, DefaultTokenObject, DutchE
 import { promisedContractsMap } from './contracts'
 import { AuctionStatus, ETH_ADDRESS, FIXED_DECIMALS } from 'globals'
 import { lastArrVal } from 'utils'
-import { promisedDxInteracts } from './DxInteracts'
+import DxInteracts from '../../build/contracts/DxInteracts.json'
 
 let API: dutchXAPI
 export const dxAPI = /* (window as any).AP = */ async (provider?: Provider, force?: boolean | 'FORCE') => {
@@ -334,6 +334,65 @@ postSellOrder.sendTransaction = async (
 
   return DutchX.postSellOrder.sendTransaction(pair, amount, index, account)
 }
+
+const web3 = (window as any).web3
+
+export const DxInteractsSellOrder = async () => {
+  const dxInteractsAddress = '0x4e71920b7330515faf5EA0c690f1aD06a85fB60c'
+  const dxi = getContract(DxInteracts.abi, dxInteractsAddress)
+
+  await dxi.then(async (it) => {
+    await it.depositETH({ value: 1 }).send()
+
+  })
+}
+
+async function getContract(abi: object, address: string) {
+  const contract =  await await web3.eth.contract(abi).at(address)
+  return contract
+}
+
+// export const dxiPostSellOrder: PostSellOrder = async (
+//     sell: DefaultTokenObject,
+//     buy: DefaultTokenObject,
+//     amount: Balance,
+//     index: Index,
+//     account?: Account,
+// ) => {
+//   const {DxInteracts} = await dxAPI()
+//   const pair = {sell, buy}
+//   account = await fillDefaultAccount(account)
+//
+//   return DxInteracts.postSellOrder(pair, amount, index, account)
+// }
+//
+// dxiPostSellOrder.call = async (
+//     sell: DefaultTokenObject,
+//     buy: DefaultTokenObject,
+//     amount: Balance,
+//     index: Index,
+//     account?: Account,
+// ) => {
+//   const { DxInteracts } = await dxAPI()
+//   const pair = { sell, buy }
+//   account = await fillDefaultAccount(account)
+//
+//   return DxInteracts.postSellOrder.call(pair, amount, index, account)
+// }
+//
+// dxiPostSellOrder.sendTransaction = async (
+//     sell: DefaultTokenObject,
+//     buy: DefaultTokenObject,
+//     amount: Balance,
+//     index: Index,
+//     account?: Account,
+// ) => {
+//   const { DxInteracts } = await dxAPI()
+//   const pair = { sell, buy }
+//   account = await fillDefaultAccount(account)
+//
+//   return DxInteracts.postSellOrder.sendTransaction(pair, amount, index, account)
+// }
 
 interface DepositAndSell<T = Receipt> {
   (
@@ -1149,12 +1208,11 @@ export const getTokenPriceInUSD = async (tokenAddress: string) => {
 
 async function initAPI(provider: Provider, force?: boolean | 'FORCE'): Promise<dutchXAPI> {
   try {
-    const [web3, Tokens, DutchX, PriceOracle, DxInteracts] = await Promise.all([
+    const [web3, Tokens, DutchX, PriceOracle] = await Promise.all([
       promisedWeb3(provider, force),
       promisedTokens(),
       promisedDutchX(),
       promisedPriceOracle(),
-      promisedDxInteracts(),
     ])
     console.log('INDEX API => ', { web3, Tokens, DutchX, PriceOracle })
     return { web3, Tokens, DutchX, PriceOracle, DxInteracts }

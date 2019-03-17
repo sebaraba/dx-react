@@ -199,7 +199,7 @@ type DxInteractsExtended = {
       DxInteracts[K]
 }
 
-interface DxInteracts<T = Receipt> {
+interface DxInteracts<T = Receipt> extends DeployedContract {
   address: Account,
   // postSellOrder(sellAddress: Account, buyAddress: Account,
   //               auctionIndex: index, sellOrderAmount: BigNumber): Promise<T>,
