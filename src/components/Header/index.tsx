@@ -21,7 +21,7 @@ interface HeaderState {
   network?: string | 'RINKEBY' | 'MAIN' | 'UNKNOWN';
 }
 
-export const Header = ({ content, dumb, network, noMenu }: HeaderProps & HeaderState) => (
+export const Header = ({ content, dumb, network, noMenu }: HeaderProps & HeaderState & State) => (
   <header className={content ? 'solid-background' : ''}>
     <div>
       <Link

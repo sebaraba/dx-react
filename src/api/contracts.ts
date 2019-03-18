@@ -25,6 +25,7 @@ const contractNames = [
   'TokenOWL',
   'TokenOWLProxy',
   'PriceOracleInterface',
+
 ]
 
 // breaks in rinkeby, cancel for now

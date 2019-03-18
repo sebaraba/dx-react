@@ -278,6 +278,10 @@ export interface AuctionsState {
   availableAuctions: AvailableAuctions,
 }
 
+export interface ExpressMode {
+  expressMode: boolean,
+}
+
 /**
  * represents global State of redux store
  * @export
@@ -296,4 +300,5 @@ export interface State {
   tokenOverlay: TokenOverlay,
   approvedTokens: AccountsSet,
   settings: Settings & CookieSettings,
+  expressMode: ExpressMode,
 }

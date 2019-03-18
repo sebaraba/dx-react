@@ -13,6 +13,7 @@ import tokenOverlay from './tokenOverlay'
 import tokenPair from './tokenPair'
 
 import dxBalances from 'actions/dxBalances'
+import expressMode from './expressMode'
 
 const reducers = combineReducers<State>({
   auctions,
@@ -26,6 +27,7 @@ const reducers = combineReducers<State>({
   tokenList,
   tokenOverlay,
   tokenPair,
+  expressMode,
 
   dxBalances,
 })
